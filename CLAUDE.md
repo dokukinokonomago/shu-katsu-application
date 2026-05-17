@@ -24,6 +24,7 @@ PAI分析から採用する中心思想:
 | `docs/product-thesis.md` | プロダクトの存在理由、非目標、設計原則 |
 | `docs/memory-model.md` | 記憶データの型、寿命、信頼度、変換パイプライン |
 | `docs/onboarding-ux.md` | 初回体験、質問設計、プログレッシブ開示 |
+| `AUTOMATION_RULEBOOK.md` | 自動化、フルオート機能、AIエージェント実行の安全境界 |
 | `research/pai-analysis/` | PAIから抽出した設計原則の根拠 |
 
 ## Architecture Vocabulary
@@ -83,6 +84,18 @@ PAI分析から採用する中心思想:
 4. AIの根拠が追跡できる。
 5. UIが高齢者や非技術者にも過度に難しくならない。
 
+## Automation Safety
+
+自動化、フルオート機能、AIエージェント実行、外部共有、定期ジョブに関わる設計または実装を行う前に、必ず `AUTOMATION_RULEBOOK.md` を読む。
+
+基本原則:
+
+- 自動化してよいのは、整理、分類、下書き、提案、検証補助まで。
+- 本人の意思確定、共有、削除、外部送信、法務・医療・財務判断は、人間の明示的な確認なしに実行しない。
+- `drafted` と `confirmed` を混ぜない。
+- `privacy_scope` を広げる変更は自動実行しない。
+- AI推測を本人の言葉として扱わない。
+
 ## File Organization Proposal
 
 今後実装する場合の候補構造:
@@ -105,4 +118,3 @@ research/
 ```
 
 これは確定アーキテクチャではない。実装フレームワーク選定後に、`docs/product-thesis.md` と `docs/memory-model.md` に沿って調整する。
-
