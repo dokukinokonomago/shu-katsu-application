@@ -194,19 +194,17 @@ npm test
 例:
 
 ```text
-次の作業は `docs/v0-spec.md` の作成です。作業運用が固まったので、次はv0で作る機能範囲を確定し、実装に入る前の判断基準を作るのが最適です。
+次の作業は `docs/technical-foundation.md` の作成です。v0の機能範囲が固まったので、次は技術選定とアプリ基盤方針を決めるのが最適です。
 ```
 
 ## Recommended Next Sequence
 
 現時点の推奨順序:
 
-1. `docs/workflow.md` を作る。
-2. `docs/v0-spec.md` で初期版の機能範囲を確定する。
-3. 技術選定を行う。
-4. アプリ基盤を作る。
-5. オンボーディングのプロトタイプを作る。
-6. Memory Capsuleのデータモデルを実装する。
-7. Memory Spaceの一覧・年表・グラフを作る。
-8. Life Companionの最小対話を作る。
-
+1. `docs/technical-foundation.md` で技術選定とアプリ基盤方針を決める。
+2. アプリ基盤を作る。
+3. オンボーディングのプロトタイプを作る。
+4. Memory Capsuleのデータモデルを実装する。
+5. Memory Spaceの一覧・年表・グラフを作る。
+6. Legacy Packet Draftを実装する。
+7. Life Companionの最小AI補助を作る。
