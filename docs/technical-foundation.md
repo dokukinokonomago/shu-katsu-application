@@ -316,11 +316,10 @@ These references informed the technical direction as of 2026-05-17:
 
 After this document is accepted:
 
-1. Scaffold the Next.js TypeScript app.
-2. Add baseline lint/typecheck/test scripts.
-3. Create `lib/domain/` types and guards.
-4. Create Dexie database and repository layer.
-5. Build static onboarding screens.
-6. Wire onboarding to local persistence.
-7. Add Memory List and Memory Detail.
-8. Add minimal AI adapter behind a feature flag.
+1. Create Dexie database and repository layer.
+2. Build static onboarding screens.
+3. Wire onboarding to local persistence.
+4. Add Memory List and Memory Detail.
+5. Add Timeline and People views.
+6. Add Legacy Packet Draft.
+7. Add minimal AI adapter behind a feature flag.

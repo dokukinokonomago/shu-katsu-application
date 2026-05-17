@@ -194,18 +194,15 @@ npm test
 例:
 
 ```text
-次の作業はNext.js TypeScriptアプリのスキャフォールドです。v0範囲と技術基盤が固まったので、次は実装土台を作るのが最適です。
+次の作業はDexieのローカルDBとrepository layerの作成です。アプリ基盤とdomain guardが入ったので、次は安全な状態遷移を永続化に通すのが最適です。
 ```
 
 ## Recommended Next Sequence
 
 現時点の推奨順序:
 
-1. Next.js TypeScriptアプリのスキャフォールドを作る。
-2. baseline lint/typecheck/test scriptsを整える。
-3. `lib/domain/` にMemory Capsuleと状態遷移ガードを作る。
-4. DexieのローカルDBとrepository layerを作る。
-5. オンボーディングのプロトタイプを作る。
-6. Memory Spaceの一覧・年表・グラフを作る。
-7. Legacy Packet Draftを実装する。
-8. Life Companionの最小AI補助を作る。
+1. DexieのローカルDBとrepository layerを作る。
+2. オンボーディングのプロトタイプを作る。
+3. Memory Spaceの一覧・年表・グラフを作る。
+4. Legacy Packet Draftを実装する。
+5. Life Companionの最小AI補助を作る。
