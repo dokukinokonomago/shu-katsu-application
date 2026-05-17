@@ -24,6 +24,7 @@ PAI分析から採用する中心思想:
 | `docs/product-thesis.md` | プロダクトの存在理由、非目標、設計原則 |
 | `docs/memory-model.md` | 記憶データの型、寿命、信頼度、変換パイプライン |
 | `docs/onboarding-ux.md` | 初回体験、質問設計、プログレッシブ開示 |
+| `docs/workflow.md` | ブランチ運用、PR運用、Codexとの作業手順 |
 | `AUTOMATION_RULEBOOK.md` | 自動化、フルオート機能、AIエージェント実行の安全境界 |
 | `research/pai-analysis/` | PAIから抽出した設計原則の根拠 |
 
