@@ -23,6 +23,7 @@ PAI分析から採用する中心思想:
 |---|---|
 | `docs/product-thesis.md` | プロダクトの存在理由、非目標、設計原則 |
 | `docs/v0-spec.md` | 初期版で作る範囲、作らない範囲、受け入れ基準 |
+| `docs/technical-foundation.md` | 技術選定、保存方式、AI接続方式、UI基盤、テスト方針 |
 | `docs/memory-model.md` | 記憶データの型、寿命、信頼度、変換パイプライン |
 | `docs/onboarding-ux.md` | 初回体験、質問設計、プログレッシブ開示 |
 | `docs/workflow.md` | ブランチ運用、PR運用、Codexとの作業手順 |

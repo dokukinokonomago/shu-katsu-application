@@ -194,17 +194,18 @@ npm test
 例:
 
 ```text
-次の作業は `docs/technical-foundation.md` の作成です。v0の機能範囲が固まったので、次は技術選定とアプリ基盤方針を決めるのが最適です。
+次の作業はNext.js TypeScriptアプリのスキャフォールドです。v0範囲と技術基盤が固まったので、次は実装土台を作るのが最適です。
 ```
 
 ## Recommended Next Sequence
 
 現時点の推奨順序:
 
-1. `docs/technical-foundation.md` で技術選定とアプリ基盤方針を決める。
-2. アプリ基盤を作る。
-3. オンボーディングのプロトタイプを作る。
-4. Memory Capsuleのデータモデルを実装する。
-5. Memory Spaceの一覧・年表・グラフを作る。
-6. Legacy Packet Draftを実装する。
-7. Life Companionの最小AI補助を作る。
+1. Next.js TypeScriptアプリのスキャフォールドを作る。
+2. baseline lint/typecheck/test scriptsを整える。
+3. `lib/domain/` にMemory Capsuleと状態遷移ガードを作る。
+4. DexieのローカルDBとrepository layerを作る。
+5. オンボーディングのプロトタイプを作る。
+6. Memory Spaceの一覧・年表・グラフを作る。
+7. Legacy Packet Draftを実装する。
+8. Life Companionの最小AI補助を作る。
