@@ -2,7 +2,12 @@ import "fake-indexeddb/auto";
 import { afterEach, describe, expect, it } from "vitest";
 import type { Actor, MemoryCapsule } from "@/lib/domain";
 import { LifeMemoryDatabase } from "./database";
-import { clearDatabase, MemoryCapsuleRepository } from "./repositories";
+import {
+  clearDatabase,
+  LifeCompanionSettingsRepository,
+  MemoryCapsuleRepository,
+  PrincipalProfileRepository,
+} from "./repositories";
 
 const principal: Actor = {
   id: "actor-principal",
@@ -166,3 +171,41 @@ describe("MemoryCapsuleRepository", () => {
   });
 });
 
+describe("onboarding profile repositories", () => {
+  it("upserts principal profile and preserves createdAt", async () => {
+    const repository = new PrincipalProfileRepository(database);
+    const profile = await repository.upsertPrincipalProfile({
+      id: "principal-default",
+      displayName: "山田 花子",
+      birthYearOrDecade: "1950年代",
+      homeRegion: "奈良県",
+      purposeForUsingApp: "家族に伝えたいことを整理したい。",
+    });
+    const updated = await repository.upsertPrincipalProfile({
+      id: "principal-default",
+      displayName: "山田 花子",
+      birthYearOrDecade: "1950年代",
+      homeRegion: "奈良県",
+      purposeForUsingApp: "思い出も整理したい。",
+    });
+
+    expect(updated.createdAt).toBe(profile.createdAt);
+    expect(updated.updatedAt).toBeTruthy();
+    expect(updated.purposeForUsingApp).toBe("思い出も整理したい。");
+  });
+
+  it("upserts life companion settings", async () => {
+    const repository = new LifeCompanionSettingsRepository(database);
+    const settings = await repository.upsertLifeCompanionSettings({
+      id: "companion-default",
+      companionName: "灯",
+      companionTone: "穏やか、簡潔",
+      relationshipStyle: "編集者のように整理する",
+    });
+
+    expect(settings.companionName).toBe("灯");
+    expect(await repository.getLatestLifeCompanionSettings()).toMatchObject({
+      id: "companion-default",
+    });
+  });
+});

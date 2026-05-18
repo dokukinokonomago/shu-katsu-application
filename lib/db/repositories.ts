@@ -4,11 +4,15 @@ import {
   canSetVerificationStatus,
   createAuditEvent,
   getVerificationStatusAfterContentEdit,
+  lifeCompanionSettingsSchema,
   memoryCapsuleSchema,
+  principalProfileSchema,
   type Actor,
   type AuditEvent,
+  type LifeCompanionSettings,
   type MemoryCapsule,
   type PrivacyScope,
+  type PrincipalProfile,
   type VerificationStatus,
 } from "@/lib/domain";
 import { db, type LifeMemoryDatabase } from "./database";
@@ -31,6 +35,64 @@ function createId(prefix: string): string {
 
 function getNow(): string {
   return new Date().toISOString();
+}
+
+export class PrincipalProfileRepository {
+  constructor(private readonly database: LifeMemoryDatabase = db) {}
+
+  async upsertPrincipalProfile(
+    input: Omit<PrincipalProfile, "createdAt" | "updatedAt"> &
+      Partial<Pick<PrincipalProfile, "createdAt" | "updatedAt">>,
+  ): Promise<PrincipalProfile> {
+    const existing = await this.database.principalProfiles.get(input.id);
+    const now = getNow();
+    const profile = principalProfileSchema.parse({
+      ...input,
+      createdAt: input.createdAt ?? existing?.createdAt ?? now,
+      updatedAt: now,
+    });
+
+    await this.database.principalProfiles.put(profile);
+
+    return profile;
+  }
+
+  async getPrincipalProfile(id: string): Promise<PrincipalProfile | undefined> {
+    return this.database.principalProfiles.get(id);
+  }
+
+  async getLatestPrincipalProfile(): Promise<PrincipalProfile | undefined> {
+    return this.database.principalProfiles.orderBy("updatedAt").last();
+  }
+}
+
+export class LifeCompanionSettingsRepository {
+  constructor(private readonly database: LifeMemoryDatabase = db) {}
+
+  async upsertLifeCompanionSettings(
+    input: Omit<LifeCompanionSettings, "createdAt" | "updatedAt"> &
+      Partial<Pick<LifeCompanionSettings, "createdAt" | "updatedAt">>,
+  ): Promise<LifeCompanionSettings> {
+    const existing = await this.database.companionSettings.get(input.id);
+    const now = getNow();
+    const settings = lifeCompanionSettingsSchema.parse({
+      ...input,
+      createdAt: input.createdAt ?? existing?.createdAt ?? now,
+      updatedAt: now,
+    });
+
+    await this.database.companionSettings.put(settings);
+
+    return settings;
+  }
+
+  async getLifeCompanionSettings(id: string): Promise<LifeCompanionSettings | undefined> {
+    return this.database.companionSettings.get(id);
+  }
+
+  async getLatestLifeCompanionSettings(): Promise<LifeCompanionSettings | undefined> {
+    return this.database.companionSettings.orderBy("updatedAt").last();
+  }
 }
 
 function createStatusAuditEvent(input: {
@@ -304,6 +366,14 @@ export function getMemoryCapsuleRepository(database: LifeMemoryDatabase = db) {
   return new MemoryCapsuleRepository(database);
 }
 
+export function getPrincipalProfileRepository(database: LifeMemoryDatabase = db) {
+  return new PrincipalProfileRepository(database);
+}
+
+export function getLifeCompanionSettingsRepository(database: LifeMemoryDatabase = db) {
+  return new LifeCompanionSettingsRepository(database);
+}
+
 export async function clearDatabase(database: LifeMemoryDatabase = db): Promise<void> {
   const tables: Table[] = [
     database.principalProfiles,
@@ -319,4 +389,3 @@ export async function clearDatabase(database: LifeMemoryDatabase = db): Promise<
     await Promise.all(tables.map((table) => table.clear()));
   });
 }
-

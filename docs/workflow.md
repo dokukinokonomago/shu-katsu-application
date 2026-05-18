@@ -194,14 +194,14 @@ npm test
 例:
 
 ```text
-次の作業はオンボーディングをローカルDBへ保存する実装です。静的プロトタイプができたので、次は入力内容をdomain schemaとrepository layerへ接続するのが最適です。
+次の作業はMemory ListとMemory Detailの作成です。オンボーディング保存がDBへつながったので、次は保存したMemory Capsuleを閲覧・確認できる画面を作るのが最適です。
 ```
 
 ## Recommended Next Sequence
 
 現時点の推奨順序:
 
-1. オンボーディングをローカルDBへ保存する。
-2. Memory Spaceの一覧・年表・グラフを作る。
+1. Memory ListとMemory Detailを作る。
+2. TimelineとPeople viewsを作る。
 3. Legacy Packet Draftを実装する。
 4. Life Companionの最小AI補助を作る。
