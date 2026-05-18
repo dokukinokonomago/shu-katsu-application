@@ -1,0 +1,287 @@
+import {
+  ArrowRight,
+  BookOpenText,
+  CheckCircle2,
+  Circle,
+  ClipboardCheck,
+  HeartHandshake,
+  LockKeyhole,
+  MessageCircleQuestion,
+  PenLine,
+  ShieldCheck,
+  UserRound,
+} from "lucide-react";
+import Link from "next/link";
+
+const steps = [
+  "Welcome",
+  "Safety",
+  "Profile",
+  "Companion",
+  "Purpose",
+  "Memory",
+  "Review",
+  "Preview",
+];
+
+const safetyPromises = [
+  "AIの下書きは本人確認前に確定記録になりません。",
+  "共有範囲は記憶ごとに選びます。",
+  "法務・税務・医療の判断は専門家確認が必要です。",
+  "非公開に戻す導線を常に残します。",
+];
+
+const memoryPrompts = [
+  {
+    title: "大切な人について",
+    target: "person / episode",
+    body: "その人との関係、忘れたくない場面、いつか伝えたいことを残します。",
+  },
+  {
+    title: "忘れたくない出来事",
+    target: "episode",
+    body: "時期が曖昧でもよいので、人生の意味を作った出来事を記録します。",
+  },
+  {
+    title: "家族に残したい考え",
+    target: "value / wish",
+    body: "判断軸、感謝、希望、誤解されたくないことを言葉にします。",
+  },
+];
+
+const reviewFields = [
+  ["タイトル", "父と歩いた商店街の帰り道"],
+  ["確認状態", "drafted"],
+  ["共有範囲", "private"],
+  ["関連人物", "父"],
+  ["感情・価値観", "感謝 / 家族 / 継承"],
+  ["未確認点", "何年頃の出来事か。誰に共有してよいか。"],
+];
+
+function Field({
+  label,
+  value,
+  multiline = false,
+}: {
+  label: string;
+  value: string;
+  multiline?: boolean;
+}) {
+  return (
+    <label className="block">
+      <span className="mb-2 block text-sm font-semibold text-[var(--foreground)]">{label}</span>
+      {multiline ? (
+        <textarea
+          className="min-h-28 w-full resize-none rounded-md border border-[var(--line)] bg-white px-3 py-3 leading-7 text-[var(--foreground)] outline-none focus:border-[var(--accent)]"
+          defaultValue={value}
+        />
+      ) : (
+        <input
+          className="min-h-11 w-full rounded-md border border-[var(--line)] bg-white px-3 text-[var(--foreground)] outline-none focus:border-[var(--accent)]"
+          defaultValue={value}
+        />
+      )}
+    </label>
+  );
+}
+
+export default function OnboardingPage() {
+  return (
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <header className="border-b border-[var(--line)] bg-[var(--panel)]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <Link className="text-sm font-semibold" href="/">
+            Life Memory
+          </Link>
+          <div className="text-sm text-[var(--muted)]">static onboarding prototype</div>
+        </div>
+      </header>
+
+      <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[260px_1fr]">
+        <aside className="lg:sticky lg:top-6 lg:self-start">
+          <p className="mb-3 text-sm font-semibold text-[var(--muted)]">v0 flow</p>
+          <ol className="space-y-2">
+            {steps.map((step, index) => (
+              <li
+                className="flex items-center gap-3 rounded-md border border-[var(--line)] bg-[var(--panel)] px-3 py-2 text-sm"
+                key={step}
+              >
+                {index < 2 ? (
+                  <CheckCircle2 aria-hidden="true" className="size-4 text-[var(--accent)]" />
+                ) : (
+                  <Circle aria-hidden="true" className="size-4 text-[var(--muted)]" />
+                )}
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </aside>
+
+        <div className="space-y-8">
+          <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="py-4">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-1 text-sm text-[var(--muted)]">
+                <HeartHandshake aria-hidden="true" className="size-4" />
+                Welcome
+              </div>
+              <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">
+                最初は、3つの記憶から始めます
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--muted)]">
+                終活情報を急いで埋めるのではなく、本人の文脈、AIとの距離感、共有範囲、安全境界を確認しながら記憶カプセルを作ります。
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button className="inline-flex min-h-11 items-center gap-2 rounded-md bg-[var(--accent)] px-5 text-sm font-semibold text-white">
+                  はじめる
+                  <ArrowRight aria-hidden="true" className="size-4" />
+                </button>
+                <button className="inline-flex min-h-11 items-center rounded-md border border-[var(--line)] px-5 text-sm font-semibold">
+                  共有とAIの扱いを読む
+                </button>
+              </div>
+            </div>
+
+            <section className="rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5">
+              <div className="mb-4 flex items-center gap-2">
+                <ShieldCheck aria-hidden="true" className="size-5 text-[var(--accent)]" />
+                <h2 className="text-lg font-semibold">最初に確認する4つの約束</h2>
+              </div>
+              <ul className="space-y-3">
+                {safetyPromises.map((promise) => (
+                  <li className="flex gap-3 leading-7 text-[var(--muted)]" key={promise}>
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-1 size-4 shrink-0 text-[var(--accent)]"
+                    />
+                    <span>{promise}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </section>
+
+          <section className="grid gap-6 lg:grid-cols-2">
+            <div className="rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5">
+              <div className="mb-5 flex items-center gap-2">
+                <UserRound aria-hidden="true" className="size-5 text-[var(--accent)]" />
+                <h2 className="text-xl font-semibold">Principal Profile</h2>
+              </div>
+              <div className="grid gap-4">
+                <Field label="呼ばれたい名前" value="山田 花子" />
+                <Field label="生年または年代" value="1950年代" />
+                <Field label="主な居住地域" value="奈良県" />
+                <Field
+                  label="このアプリを使う理由"
+                  multiline
+                  value="家族に伝えたいことと、残しておきたい思い出を少しずつ整理したい。"
+                />
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5">
+              <div className="mb-5 flex items-center gap-2">
+                <MessageCircleQuestion
+                  aria-hidden="true"
+                  className="size-5 text-[var(--accent)]"
+                />
+                <h2 className="text-xl font-semibold">Life Companion</h2>
+              </div>
+              <div className="grid gap-4">
+                <Field label="Companionの名前" value="灯" />
+                <Field label="口調" value="穏やか、簡潔、聞き役中心" />
+                <Field label="距離感" value="編集者のように、急かさず整理する" />
+                <Field
+                  label="残したくない、または今は触れたくない領域"
+                  multiline
+                  value="資産や医療の細かい話は、信頼できる人と一緒に確認してから進めたい。"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div className="mb-4 flex items-center gap-2">
+              <BookOpenText aria-hidden="true" className="size-5 text-[var(--accent)]" />
+              <h2 className="text-xl font-semibold">First Memory Prompts</h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {memoryPrompts.map((prompt) => (
+                <article
+                  className="rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5"
+                  key={prompt.title}
+                >
+                  <div className="mb-3 text-xs font-semibold uppercase text-[var(--accent)]">
+                    {prompt.target}
+                  </div>
+                  <h3 className="text-lg font-semibold">{prompt.title}</h3>
+                  <p className="mt-3 leading-7 text-[var(--muted)]">{prompt.body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5">
+              <div className="mb-5 flex items-center gap-2">
+                <PenLine aria-hidden="true" className="size-5 text-[var(--accent)]" />
+                <h2 className="text-xl font-semibold">Memory Create</h2>
+              </div>
+              <div className="grid gap-4">
+                <Field label="何がありましたか" multiline value="父と夕方の商店街を歩き、帰りに小さな菓子を買ってもらった。何気ない時間だったけれど、今でも安心した気持ちを思い出す。" />
+                <Field label="誰が関係していますか" value="父" />
+                <Field label="いつ頃ですか" value="小学生の頃" />
+                <Field label="誰に見せてもよいですか" value="まずは非公開。後で家族共有を検討する。" />
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5">
+              <div className="mb-5 flex items-center gap-2">
+                <ClipboardCheck aria-hidden="true" className="size-5 text-[var(--accent)]" />
+                <h2 className="text-xl font-semibold">Memory Review</h2>
+              </div>
+              <div className="divide-y divide-[var(--line)] border-y border-[var(--line)]">
+                {reviewFields.map(([label, value]) => (
+                  <div className="grid gap-2 py-3 sm:grid-cols-[140px_1fr]" key={label}>
+                    <div className="text-sm font-semibold text-[var(--muted)]">{label}</div>
+                    <div className="leading-7">{value}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <button className="inline-flex min-h-11 items-center rounded-md bg-[var(--accent)] px-4 text-sm font-semibold text-white">
+                  確認済みにする
+                </button>
+                <button className="inline-flex min-h-11 items-center rounded-md border border-[var(--line)] px-4 text-sm font-semibold">
+                  下書きのまま保存
+                </button>
+                <button className="inline-flex min-h-11 items-center gap-2 rounded-md border border-[var(--line)] px-4 text-sm font-semibold">
+                  <LockKeyhole aria-hidden="true" className="size-4" />
+                  非公開にする
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-[var(--line)] bg-[var(--panel)] p-5">
+            <h2 className="text-xl font-semibold">Memory Space Preview</h2>
+            <div className="mt-5 grid gap-4 md:grid-cols-[180px_1fr]">
+              <div className="flex min-h-40 items-center justify-center rounded-lg border border-dashed border-[var(--accent)] text-center font-semibold text-[var(--accent)]">
+                本人
+              </div>
+              <div className="grid gap-3 sm:grid-cols-3">
+                {["人物", "出来事", "価値観"].map((label) => (
+                  <div
+                    className="flex min-h-28 items-center justify-center rounded-lg border border-[var(--line)] bg-white text-sm font-semibold"
+                    key={label}
+                  >
+                    {label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  );
+}

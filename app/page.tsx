@@ -1,4 +1,5 @@
 import { BookOpenText, CircleCheck, LockKeyhole, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 const foundations = [
   {
@@ -33,6 +34,20 @@ export default function Home() {
           <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--muted)]">
             終活をチェックリストだけで終わらせず、本人の記憶、価値観、関係性、共有範囲を丁寧に整理するためのローカルファーストなWebアプリです。
           </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              className="inline-flex min-h-11 items-center rounded-md bg-[var(--accent)] px-5 text-sm font-semibold text-white"
+              href="/onboarding"
+            >
+              はじめる
+            </Link>
+            <Link
+              className="inline-flex min-h-11 items-center rounded-md border border-[var(--line)] px-5 text-sm font-semibold text-[var(--foreground)]"
+              href="/onboarding"
+            >
+              プロトタイプを見る
+            </Link>
+          </div>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -55,4 +70,3 @@ export default function Home() {
     </main>
   );
 }
-

@@ -316,9 +316,8 @@ These references informed the technical direction as of 2026-05-17:
 
 After this document is accepted:
 
-1. Build static onboarding screens.
-2. Wire onboarding to local persistence.
-3. Add Memory List and Memory Detail.
-4. Add Timeline and People views.
-5. Add Legacy Packet Draft.
-6. Add minimal AI adapter behind a feature flag.
+1. Wire onboarding to local persistence.
+2. Add Memory List and Memory Detail.
+3. Add Timeline and People views.
+4. Add Legacy Packet Draft.
+5. Add minimal AI adapter behind a feature flag.

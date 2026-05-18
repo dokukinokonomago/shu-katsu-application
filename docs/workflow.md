@@ -194,15 +194,14 @@ npm test
 例:
 
 ```text
-次の作業はオンボーディングの静的プロトタイプ作成です。domain guardとrepository layerが入ったので、次はv0の入口体験を画面として組み立てるのが最適です。
+次の作業はオンボーディングをローカルDBへ保存する実装です。静的プロトタイプができたので、次は入力内容をdomain schemaとrepository layerへ接続するのが最適です。
 ```
 
 ## Recommended Next Sequence
 
 現時点の推奨順序:
 
-1. オンボーディングの静的プロトタイプを作る。
-2. オンボーディングをローカルDBへ保存する。
-3. Memory Spaceの一覧・年表・グラフを作る。
-4. Legacy Packet Draftを実装する。
-5. Life Companionの最小AI補助を作る。
+1. オンボーディングをローカルDBへ保存する。
+2. Memory Spaceの一覧・年表・グラフを作る。
+3. Legacy Packet Draftを実装する。
+4. Life Companionの最小AI補助を作る。
