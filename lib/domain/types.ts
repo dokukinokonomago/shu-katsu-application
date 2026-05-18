@@ -76,6 +76,33 @@ export const relatedPersonRefSchema = z.object({
 
 export type RelatedPersonRef = z.infer<typeof relatedPersonRefSchema>;
 
+export const principalProfileSchema = z.object({
+  id: z.string().min(1),
+  displayName: z.string().min(1),
+  birthYearOrDecade: z.string().min(1),
+  homeRegion: z.string().min(1),
+  purposeForUsingApp: z.string().min(1),
+  occupationOrLifeWork: z.string().optional(),
+  importantRelationshipsNote: z.string().optional(),
+  faithOrValuesNote: z.string().optional(),
+  topicsToAvoid: z.string().optional(),
+  createdAt: z.string().min(1),
+  updatedAt: z.string().min(1),
+});
+
+export type PrincipalProfile = z.infer<typeof principalProfileSchema>;
+
+export const lifeCompanionSettingsSchema = z.object({
+  id: z.string().min(1),
+  companionName: z.string().min(1),
+  companionTone: z.string().min(1),
+  relationshipStyle: z.string().optional(),
+  createdAt: z.string().min(1),
+  updatedAt: z.string().min(1),
+});
+
+export type LifeCompanionSettings = z.infer<typeof lifeCompanionSettingsSchema>;
+
 export const memoryCapsuleSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
@@ -148,3 +175,11 @@ export const auditEventSchema = z.object({
 
 export type AuditEvent = z.infer<typeof auditEventSchema>;
 
+export const appSettingsSchema = z.object({
+  id: z.string().min(1),
+  key: z.string().min(1),
+  value: z.unknown(),
+  updatedAt: z.string().min(1),
+});
+
+export type AppSettings = z.infer<typeof appSettingsSchema>;

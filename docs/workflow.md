@@ -194,15 +194,15 @@ npm test
 例:
 
 ```text
-次の作業はDexieのローカルDBとrepository layerの作成です。アプリ基盤とdomain guardが入ったので、次は安全な状態遷移を永続化に通すのが最適です。
+次の作業はオンボーディングの静的プロトタイプ作成です。domain guardとrepository layerが入ったので、次はv0の入口体験を画面として組み立てるのが最適です。
 ```
 
 ## Recommended Next Sequence
 
 現時点の推奨順序:
 
-1. DexieのローカルDBとrepository layerを作る。
-2. オンボーディングのプロトタイプを作る。
+1. オンボーディングの静的プロトタイプを作る。
+2. オンボーディングをローカルDBへ保存する。
 3. Memory Spaceの一覧・年表・グラフを作る。
 4. Legacy Packet Draftを実装する。
 5. Life Companionの最小AI補助を作る。
